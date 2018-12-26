@@ -3,4 +3,4 @@
 .nyc*
 coverage
 node_modules
-.vscode/launch.json
+.vscode

@@ -1,11 +1,11 @@
 const assert = require("assert");
 
-const { wc } = require("../lib.js");
+const { wc } = require("../src/lib.js");
 
 const dummyFiles = {
   "fiveChars.txt": "a b c d e",
   "fiveLines.txt": "1\n2\n3\n4\n5",
-  "adjacentSpaces.txt" : "a   b2 c\n"
+  "adjacentSpaces.txt": "a   b2 c\n"
 };
 
 const readFileSync = function(path, encoding) {
