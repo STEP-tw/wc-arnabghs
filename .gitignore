@@ -1,0 +1,6 @@
+*.swp
+*.swo
+.nyc*
+coverage
+node_modules
+.vscode/launch.json

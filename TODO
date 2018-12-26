@@ -1,0 +1,10 @@
+  pass -- node ./wc.js file1
+
+  npm initialization,
+  install mocha in dev-dep and add to test,
+  install prettier in dev-dep,
+
+  add .gitignore
+
+  create head level test,
+  pass it with dummyfs,

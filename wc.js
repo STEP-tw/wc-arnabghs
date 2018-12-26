@@ -29,3 +29,11 @@
   node ./wc.js -c -w -l file1 [file2]...
   node ./wc.js -c -l -w file1 [file2]...
 */
+
+const fs = require("fs");
+
+const { wc } = require("./lib.js");
+
+const userArgs = process.argv.slice(2);
+
+console.log(wc(userArgs, fs));

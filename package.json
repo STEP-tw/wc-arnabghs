@@ -1,0 +1,26 @@
+{
+  "name": "wc-arnabghs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "wc.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STEP-tw/wc-arnabghs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/STEP-tw/wc-arnabghs/issues"
+  },
+  "homepage": "https://github.com/STEP-tw/wc-arnabghs#readme",
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "prettier": "^1.15.3"
+  }
+}
