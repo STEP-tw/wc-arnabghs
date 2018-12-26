@@ -1,8 +1,16 @@
 const { readUserInput } = require("./parse.js");
 
+const {
+  getLineCount,
+  getByteCount,
+  getWordCount,
+  addLines,
+  addWords,
+  addBytes
+} = require("./util.js");
+
 const wc = function(userArgs, fs) {
   let { paths } = readUserInput(userArgs);
-
   const fsBoundGetDeatils = getDetails.bind(null, fs);
   let detailsOfFiles = paths.map(fsBoundGetDeatils);
   if (detailsOfFiles.length != 1) detailsOfFiles.push(getTotal(detailsOfFiles));
@@ -11,13 +19,9 @@ const wc = function(userArgs, fs) {
 
 const getDetails = function(fs, path) {
   let content = fs.readFileSync(path, "utf-8");
-  let lineCount = content.split("\n").length - 1;
-  let byteCount = content.split("").length;
-  let wordCount = content
-    .replace(/\n/g, " ")
-    .split(" ")
-    .filter(x => x !== "").length;
-
+  let lineCount = getLineCount(content);
+  let byteCount = getByteCount(content);
+  let wordCount = getWordCount(content);
   return { lineCount, wordCount, byteCount, path };
 };
 
@@ -27,14 +31,6 @@ const createPrintableFormat = function(fileDetails) {
 };
 
 const getTotal = function(detailsOfFiles) {
-  const add = function(type, total, details) {
-    return total + details[type];
-  };
-
-  const addLines = add.bind(null, "lineCount");
-  const addWords = add.bind(null, "wordCount");
-  const addBytes = add.bind(null, "byteCount");
-
   let lineCount = detailsOfFiles.reduce(addLines, 0);
   let wordCount = detailsOfFiles.reduce(addWords, 0);
   let byteCount = detailsOfFiles.reduce(addBytes, 0);
