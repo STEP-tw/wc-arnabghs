@@ -59,10 +59,20 @@ describe("head level test for wc", () => {
   });
   describe("wc -l file1", () => {
     it("should provide the number of lines for a single file", () => {
-      let userArgs = ["-l","fiveLines.txt"];
+      let userArgs = "-l fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
       console.log(actualOutput);
       let expectedOutput = "       4 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("wc -l file1 file2", () => {
+    it("should provide the number of lines of all files and their sum", () => {
+      let userArgs = "-l fiveLines.txt fiveChars.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       4 fiveLines.txt\n";
+      expectedOutput += "       0 fiveChars.txt\n";
+      expectedOutput += "       4 total";
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
