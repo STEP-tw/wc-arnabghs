@@ -34,8 +34,10 @@ const createPrintableFormat = function(option, fileDetails) {
   let justifiedWordCount = justifier(wordCount) + wordCount;
   let justifiedByteCount = justifier(byteCount) + byteCount;
   if (option == "l") return justifiedLineCount + justifiedPath;
-  if (option == "c") return justifiedByteCount + justifiedPath;
   if (option == "w") return justifiedWordCount + justifiedPath;
+  if (option == "c") return justifiedByteCount + justifiedPath;
+  if (option == "lw")
+    return justifiedLineCount + justifiedWordCount + justifiedPath;
   return (
     justifiedLineCount + justifiedWordCount + justifiedByteCount + justifiedPath
   );

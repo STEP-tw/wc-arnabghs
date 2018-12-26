@@ -114,6 +114,14 @@ describe("head level test for wc", () => {
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
+  describe("wc -lw file1", () => {
+    it("should count lines and words when -lw is specified", () => {
+      let userArgs = "-lw fiveLines.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       4       5 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
 });
 
 describe("getDetails", () => {
