@@ -2,9 +2,10 @@ const { readUserInput } = require("./parse.js");
 
 const wc = function(userArgs, fs) {
   let { paths } = readUserInput(userArgs);
+
   const fsBoundGetDeatils = getDetails.bind(null, fs);
-  let fileDetails = paths.map(fsBoundGetDeatils);
-  return fileDetails.join("\n");
+  let detailsOfFiles = paths.map(fsBoundGetDeatils);
+  return detailsOfFiles.map(createPrintableFormat).join("\n");
 };
 
 const getDetails = function(fs, path) {
@@ -16,6 +17,11 @@ const getDetails = function(fs, path) {
     .split(" ")
     .filter(x => x !== "").length;
 
+  return { lineCount, wordCount, byteCount, path };
+};
+
+const createPrintableFormat = function(fileDetails) {
+  let { lineCount, wordCount, byteCount, path } = fileDetails;
   return ["", lineCount, wordCount, byteCount, path].join("\t");
 };
 

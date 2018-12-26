@@ -40,3 +40,13 @@ describe("wc file1", () => {
     });
   });
 });
+describe.skip("wc file1 file2", () => {
+  it("should return line, word and byte count and a total for multiple files", () => {
+    let userArgs = "fiveLines.txt fiveChars.txt".split(" ");
+    let actualOutput = wc(userArgs, dummyFs);
+    let expectedOutput = "\t4\t5\t9\tfiveLines.txt";
+    expectedOutput += "\n\t0\t5\t9\tfiveChars.txt";
+    expectedOutput += "\n\t4\t10\t18\ttotal";
+    assert.deepEqual(actualOutput, expectedOutput);
+  });
+});
