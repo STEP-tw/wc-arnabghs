@@ -2,7 +2,7 @@ const wc = function(userArgs, fs) {
   let path = userArgs[0];
   let content = fs.readFileSync(path, "utf-8");
 
-  let lineCount = content.split("\n").length;
+  let lineCount = content.split("\n").length - 1;
   let byteCount = content.split("").length;
 
   let wordCount = content
