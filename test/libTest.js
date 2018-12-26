@@ -40,7 +40,8 @@ describe("wc file1", () => {
     });
   });
 });
-describe.skip("wc file1 file2", () => {
+
+describe("wc file1 file2", () => {
   it("should return line, word and byte count and a total for multiple files", () => {
     let userArgs = "fiveLines.txt fiveChars.txt".split(" ");
     let actualOutput = wc(userArgs, dummyFs);
