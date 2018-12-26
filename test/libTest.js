@@ -76,6 +76,15 @@ describe("head level test for wc", () => {
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
+  describe("wc -c file1", () => {
+    it("should provide the number of bytes for a single file", () => {
+      let userArgs = "-c fiveLines.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      console.log(actualOutput);
+      let expectedOutput = "       9 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
 });
 
 describe("getDetails", () => {

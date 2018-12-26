@@ -12,7 +12,7 @@ const {
 
 const wc = function(userArgs, fs) {
   let { paths, option } = readUserInput(userArgs);
-  const formatAsPerOption = createPrintableFormat.bind(null,option);
+  const formatAsPerOption = createPrintableFormat.bind(null, option);
   const fsBoundGetDeatils = getDetails.bind(null, fs);
   let detailsOfFiles = paths.map(fsBoundGetDeatils);
   if (detailsOfFiles.length != 1) detailsOfFiles.push(getTotal(detailsOfFiles));
@@ -34,6 +34,7 @@ const createPrintableFormat = function(option, fileDetails) {
   let justifiedWordCount = justifier(wordCount) + wordCount;
   let justifiedByteCount = justifier(byteCount) + byteCount;
   if (option == "l") return justifiedLineCount + justifiedPath;
+  if (option == "c") return justifiedByteCount + justifiedPath;
   return (
     justifiedLineCount + justifiedWordCount + justifiedByteCount + justifiedPath
   );
