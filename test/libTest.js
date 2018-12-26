@@ -85,6 +85,16 @@ describe("head level test for wc", () => {
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
+  describe("wc -c file1 file2", () => {
+    it("should provide the number of bytes of all files and their sum", () => {
+      let userArgs = "-c fiveLines.txt fiveChars.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       9 fiveLines.txt\n";
+      expectedOutput += "       9 fiveChars.txt\n";
+      expectedOutput += "      18 total";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
 });
 
 describe("getDetails", () => {
