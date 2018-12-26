@@ -19,41 +19,52 @@ const readFileSync = function(path, encoding) {
 
 const dummyFs = { readFileSync };
 
-describe("wc file1", () => {
-  describe("for content with one line", () => {
-    it("should display the number of lines, words, and bytes of the file along with the file name at the end", () => {
-      let userArgs = ["fiveChars.txt"];
-      let actualOutput = wc(userArgs, dummyFs);
-      let expectedOutput = "       0       5       9 fiveChars.txt";
-      assert.deepEqual(actualOutput, expectedOutput);
+describe("head level test for wc", () => {
+  describe("wc file1", () => {
+    describe("for content with one line", () => {
+      it("should display the number of lines, words, and bytes of the file along with the file name at the end", () => {
+        let userArgs = ["fiveChars.txt"];
+        let actualOutput = wc(userArgs, dummyFs);
+        let expectedOutput = "       0       5       9 fiveChars.txt";
+        assert.deepEqual(actualOutput, expectedOutput);
+      });
+    });
+    describe("for content with multiple lines", () => {
+      it("should display the number of lines, words, and bytes of the file along with the file name at the end", () => {
+        let userArgs = ["fiveLines.txt"];
+        let actualOutput = wc(userArgs, dummyFs);
+        let expectedOutput = "       4       5       9 fiveLines.txt";
+        assert.deepEqual(actualOutput, expectedOutput);
+      });
+    });
+    describe("for content with adjacent spaces", () => {
+      it("should display the number of lines, words, and bytes of the file along with the file name at the end", () => {
+        let userArgs = ["adjacentSpaces.txt"];
+        let actualOutput = wc(userArgs, dummyFs);
+        let expectedOutput = "       1       3       9 adjacentSpaces.txt";
+        assert.deepEqual(actualOutput, expectedOutput);
+      });
     });
   });
-  describe("for content with multiple lines", () => {
-    it("should display the number of lines, words, and bytes of the file along with the file name at the end", () => {
-      let userArgs = ["fiveLines.txt"];
-      let actualOutput = wc(userArgs, dummyFs);
-      let expectedOutput = "       4       5       9 fiveLines.txt";
-      assert.deepEqual(actualOutput, expectedOutput);
-    });
-  });
-  describe("for content with adjacent spaces", () => {
-    it("should display the number of lines, words, and bytes of the file along with the file name at the end", () => {
-      let userArgs = ["adjacentSpaces.txt"];
-      let actualOutput = wc(userArgs, dummyFs);
-      let expectedOutput = "       1       3       9 adjacentSpaces.txt";
-      assert.deepEqual(actualOutput, expectedOutput);
-    });
-  });
-});
 
-describe("wc file1 file2", () => {
-  it("should return line, word and byte count and a total for multiple files", () => {
-    let userArgs = "fiveLines.txt fiveChars.txt".split(" ");
-    let actualOutput = wc(userArgs, dummyFs);
-    let expectedOutput = "       4       5       9 fiveLines.txt\n";
-    expectedOutput += "       0       5       9 fiveChars.txt\n";
-    expectedOutput += "       4      10      18 total";
-    assert.deepEqual(actualOutput, expectedOutput);
+  describe("wc file1 file2", () => {
+    it("should return line, word and byte count and a total for multiple files", () => {
+      let userArgs = "fiveLines.txt fiveChars.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       4       5       9 fiveLines.txt\n";
+      expectedOutput += "       0       5       9 fiveChars.txt\n";
+      expectedOutput += "       4      10      18 total";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("wc -l file1", () => {
+    it("should provide the number of lines for a single file", () => {
+      let userArgs = ["-l","fiveLines.txt"];
+      let actualOutput = wc(userArgs, dummyFs);
+      console.log(actualOutput);
+      let expectedOutput = "       4 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
   });
 });
 
@@ -72,6 +83,7 @@ describe("getDetails", () => {
 });
 
 describe("createPrintableFormat", () => {
+  let option = undefined;
   let details = {
     lineCount: 4,
     wordCount: 5,
@@ -79,7 +91,7 @@ describe("createPrintableFormat", () => {
     path: "fiveLines.txt"
   };
   it("should represent the data in the printable manner", () => {
-    let actualOutput = createPrintableFormat(details);
+    let actualOutput = createPrintableFormat(option, details);
     let expectedOutput = "       4       5       9 fiveLines.txt";
     assert.deepEqual(actualOutput, expectedOutput);
   });

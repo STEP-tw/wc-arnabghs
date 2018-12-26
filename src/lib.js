@@ -11,11 +11,12 @@ const {
 } = require("./util.js");
 
 const wc = function(userArgs, fs) {
-  let { paths } = readUserInput(userArgs);
+  let { paths, option } = readUserInput(userArgs);
+  const formatAsPerOption = createPrintableFormat.bind(null,option);
   const fsBoundGetDeatils = getDetails.bind(null, fs);
   let detailsOfFiles = paths.map(fsBoundGetDeatils);
   if (detailsOfFiles.length != 1) detailsOfFiles.push(getTotal(detailsOfFiles));
-  return detailsOfFiles.map(createPrintableFormat).join("\n");
+  return detailsOfFiles.map(formatAsPerOption).join("\n");
 };
 
 const getDetails = function(fs, path) {
@@ -26,13 +27,16 @@ const getDetails = function(fs, path) {
   return { lineCount, wordCount, byteCount, path };
 };
 
-const createPrintableFormat = function(fileDetails) {
+const createPrintableFormat = function(option, fileDetails) {
   let { lineCount, wordCount, byteCount, path } = fileDetails;
-  let countsString = justifier(lineCount) + lineCount;
-  countsString += justifier(wordCount) + wordCount;
-  countsString += justifier(byteCount) + byteCount;
-
-  return countsString + " " + path;
+  let justifiedPath = " " + path;
+  let justifiedLineCount = justifier(lineCount) + lineCount;
+  let justifiedWordCount = justifier(wordCount) + wordCount;
+  let justifiedByteCount = justifier(byteCount) + byteCount;
+  if (option == "l") return justifiedLineCount + justifiedPath;
+  return (
+    justifiedLineCount + justifiedWordCount + justifiedByteCount + justifiedPath
+  );
 };
 
 const getTotal = function(detailsOfFiles) {
