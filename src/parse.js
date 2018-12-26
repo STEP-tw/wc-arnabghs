@@ -1,9 +1,8 @@
 const readUserInput = function(userArgs) {
-  let path = userArgs[0];
-  return { path };
+  let paths = userArgs.slice();
+  return { paths };
 };
 
 module.exports = {
   readUserInput
 };
-
