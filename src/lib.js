@@ -28,19 +28,24 @@ const getDetails = function(fs, path) {
 };
 
 const createPrintableFormat = function(option, fileDetails) {
+  if (option === undefined) option = "default";
   let { lineCount, wordCount, byteCount, path } = fileDetails;
   let justifiedPath = " " + path;
   let justifiedLineCount = justifier(lineCount) + lineCount;
   let justifiedWordCount = justifier(wordCount) + wordCount;
   let justifiedByteCount = justifier(byteCount) + byteCount;
-  if (option == "l") return justifiedLineCount + justifiedPath;
-  if (option == "w") return justifiedWordCount + justifiedPath;
-  if (option == "c") return justifiedByteCount + justifiedPath;
-  if (option == "lw")
-    return justifiedLineCount + justifiedWordCount + justifiedPath;
-  return (
-    justifiedLineCount + justifiedWordCount + justifiedByteCount + justifiedPath
-  );
+
+  const optionListConstructor = function(){
+    this.l =  justifiedLineCount,
+    this.w =  justifiedWordCount,
+    this.c =  justifiedByteCount,
+    this.lw = this.l + this.w,
+    this.default = this.l + this.w + this.c;
+  };
+
+  const logContent = new optionListConstructor()
+
+  return logContent[option] + justifiedPath;
 };
 
 const getTotal = function(detailsOfFiles) {
