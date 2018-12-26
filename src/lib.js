@@ -43,5 +43,8 @@ const getTotal = function(detailsOfFiles) {
 };
 
 module.exports = {
-  wc
+  wc,
+  getDetails,
+  createPrintableFormat,
+  getTotal
 };
