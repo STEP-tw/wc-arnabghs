@@ -14,11 +14,17 @@ const addLines = add.bind(null, "lineCount");
 const addWords = add.bind(null, "wordCount");
 const addBytes = add.bind(null, "byteCount");
 
+const justifier = function(string) {
+  let lengthOfSpace = 8 - string.toString().length;
+  return new Array(lengthOfSpace).fill(" ").join("");
+};
+
 module.exports = {
   getLineCount,
   getByteCount,
   getWordCount,
   addLines,
   addWords,
-  addBytes
+  addBytes,
+  justifier
 };

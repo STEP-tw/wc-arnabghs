@@ -6,7 +6,8 @@ const {
   getWordCount,
   addLines,
   addWords,
-  addBytes
+  addBytes,
+  justifier
 } = require("./util.js");
 
 const wc = function(userArgs, fs) {
@@ -27,7 +28,11 @@ const getDetails = function(fs, path) {
 
 const createPrintableFormat = function(fileDetails) {
   let { lineCount, wordCount, byteCount, path } = fileDetails;
-  return ["", lineCount, wordCount, byteCount, path].join("\t");
+  let countsString = justifier(lineCount) + lineCount;
+  countsString += justifier(wordCount) + wordCount;
+  countsString += justifier(byteCount) + byteCount;
+
+  return countsString + " " + path;
 };
 
 const getTotal = function(detailsOfFiles) {
