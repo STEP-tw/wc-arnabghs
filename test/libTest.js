@@ -222,6 +222,44 @@ describe("head level test for wc", () => {
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
+  describe("wc -lcw file1 file2", () => {
+    it("should return line, word and byte count and a total for multiple files", () => {
+      let userArgs = "-lcw fiveLines.txt fiveChars.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       4       5       9 fiveLines.txt\n";
+      expectedOutput += "       0       5       9 fiveChars.txt\n";
+      expectedOutput += "       4      10      18 total";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("wc -lcw file1", () => {
+    it("should provide the number of lines for a single file", () => {
+      let userArgs = "-lcw fiveLines.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      console.log(actualOutput);
+      let expectedOutput = "       4       5       9 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("wc -lwc file1 file2", () => {
+    it("should return line, word and byte count and a total for multiple files", () => {
+      let userArgs = "-lwc fiveLines.txt fiveChars.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       4       5       9 fiveLines.txt\n";
+      expectedOutput += "       0       5       9 fiveChars.txt\n";
+      expectedOutput += "       4      10      18 total";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("wc -lwc file1", () => {
+    it("should provide the number of lines for a single file", () => {
+      let userArgs = "-lwc fiveLines.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      console.log(actualOutput);
+      let expectedOutput = "       4       5       9 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
 });
 
 describe("getDetails", () => {

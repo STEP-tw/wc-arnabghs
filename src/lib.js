@@ -28,7 +28,8 @@ const getDetails = function(fs, path) {
 };
 
 const createPrintableFormat = function(options, fileDetails) {
-  if (options === undefined) options = "lwc".split("");
+  let orderedOptions = ["l", "w", "c"];
+  if (options === undefined) options = orderedOptions;
   let { lineCount, wordCount, byteCount, path } = fileDetails;
   let justifiedPath = " " + path;
   let justifiedLineCount = justifier(lineCount) + lineCount;
@@ -40,8 +41,9 @@ const createPrintableFormat = function(options, fileDetails) {
     w: justifiedWordCount,
     c: justifiedByteCount
   };
-  let orderedOptions = ['l','w','c'];
-  let givenOptionsInOrder = orderedOptions.filter(option => options.includes(option));
+  let givenOptionsInOrder = orderedOptions.filter(option =>
+    options.includes(option)
+  );
   return givenOptionsInOrder.map(x => optionList[x]).join("") + justifiedPath;
 };
 
