@@ -31,7 +31,7 @@ describe("readUserInput", () => {
     it("should return path and option", () => {
       let userArgs = "-w one.txt two.txt".split(" ");
       let actualOutput = readUserInput(userArgs);
-      let expectedOutput = { paths: ["one.txt", "two.txt"], options: ['w'] };
+      let expectedOutput = { paths: ["one.txt", "two.txt"], options: ["w"] };
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
@@ -39,7 +39,7 @@ describe("readUserInput", () => {
     it("should return path and options", () => {
       let userArgs = "-lw one.txt".split(" ");
       let actualOutput = readUserInput(userArgs);
-      let expectedOutput = { paths: ["one.txt"], options: ["l","w"] };
+      let expectedOutput = { paths: ["one.txt"], options: ["l", "w"] };
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
@@ -47,7 +47,18 @@ describe("readUserInput", () => {
     it("should return path and options", () => {
       let userArgs = "-cw one.txt two.txt".split(" ");
       let actualOutput = readUserInput(userArgs);
-      let expectedOutput = { paths: ["one.txt", "two.txt"], options: ["c","w"] };
+      let expectedOutput = {
+        paths: ["one.txt", "two.txt"],
+        options: ["c", "w"]
+      };
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("for one file with multiple options given seperately", () => {
+    it("should return path and options", () => {
+      let userArgs = "-l -w one.txt".split(" ");
+      let actualOutput = readUserInput(userArgs);
+      let expectedOutput = { paths: ["one.txt"], options: ["l", "w"] };
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
