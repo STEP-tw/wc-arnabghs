@@ -350,6 +350,24 @@ describe("head level test for wc", () => {
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
+  describe("wc -c -w file1", () => {
+    it("should count lines and words when -l -w is specified", () => {
+      let userArgs = "-c -w fiveLines.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       5       9 fiveLines.txt";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("wc -c -w file1 file2", () => {
+    it("should count lines and words of eact each file and then their total", () => {
+      let userArgs = "-c -w fiveLines.txt fiveChars.txt".split(" ");
+      let actualOutput = wc(userArgs, dummyFs);
+      let expectedOutput = "       5       9 fiveLines.txt\n";
+      expectedOutput += "       5       9 fiveChars.txt\n";
+      expectedOutput += "      10      18 total";
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
 });
 
 describe("getDetails", () => {
