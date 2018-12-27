@@ -13,9 +13,9 @@ const hasOption = function(firstArg) {
 
 const handleOptions = function(userArgs) {
   const firstArg = userArgs[0];
-  let option = firstArg.substr(1);
+  let options = firstArg.substr(1).split("");
   paths = userArgs.slice(1);
-  return { paths, option };
+  return { paths, options };
 };
 
 module.exports = {

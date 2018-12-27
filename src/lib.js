@@ -11,8 +11,8 @@ const {
 } = require("./util.js");
 
 const wc = function(userArgs, fs) {
-  let { paths, option } = readUserInput(userArgs);
-  const formatAsPerOption = createPrintableFormat.bind(null, option);
+  let { paths, options } = readUserInput(userArgs);
+  const formatAsPerOption = createPrintableFormat.bind(null, options);
   const fsBoundGetDeatils = getDetails.bind(null, fs);
   let detailsOfFiles = paths.map(fsBoundGetDeatils);
   if (detailsOfFiles.length != 1) detailsOfFiles.push(getTotal(detailsOfFiles));
@@ -27,30 +27,22 @@ const getDetails = function(fs, path) {
   return { lineCount, wordCount, byteCount, path };
 };
 
-const createPrintableFormat = function(option, fileDetails) {
-  if (option === undefined) option = "default";
+const createPrintableFormat = function(options, fileDetails) {
+  if (options === undefined) options = "lwc".split("");
   let { lineCount, wordCount, byteCount, path } = fileDetails;
   let justifiedPath = " " + path;
   let justifiedLineCount = justifier(lineCount) + lineCount;
   let justifiedWordCount = justifier(wordCount) + wordCount;
   let justifiedByteCount = justifier(byteCount) + byteCount;
 
-  const optionListConstructor = function() {
-    (this.l = justifiedLineCount),
-      (this.w = justifiedWordCount),
-      (this.c = justifiedByteCount),
-      (this.lw = this.l + this.w),
-      (this.wl = this.l + this.w),
-      (this.cl = this.l + this.c),
-      (this.lc = this.l + this.c),
-      (this.wc = this.w + this.c),
-      (this.cw = this.w + this.c),
-      (this.default = this.l + this.w + this.c);
+  const optionList = {
+    l: justifiedLineCount,
+    w: justifiedWordCount,
+    c: justifiedByteCount
   };
-
-  const logContent = new optionListConstructor();
-
-  return logContent[option] + justifiedPath;
+  let orderedOptions = ['l','w','c'];
+  let givenOptionsInOrder = orderedOptions.filter(option => options.includes(option));
+  return givenOptionsInOrder.map(x => optionList[x]).join("") + justifiedPath;
 };
 
 const getTotal = function(detailsOfFiles) {
