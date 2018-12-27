@@ -54,11 +54,19 @@ describe("readUserInput", () => {
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
-  describe("for one file with multiple options given seperately", () => {
+  describe("for one file with two options given seperately", () => {
     it("should return path and options", () => {
       let userArgs = "-l -w one.txt".split(" ");
       let actualOutput = readUserInput(userArgs);
       let expectedOutput = { paths: ["one.txt"], options: ["l", "w"] };
+      assert.deepEqual(actualOutput, expectedOutput);
+    });
+  });
+  describe("for one file with three options given seperately", () => {
+    it("should return path and options", () => {
+      let userArgs = "-l -w -c one.txt".split(" ");
+      let actualOutput = readUserInput(userArgs);
+      let expectedOutput = { paths: ["one.txt"], options: ["l", "w", "c"] };
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
