@@ -43,6 +43,7 @@ const createPrintableFormat = function(option, fileDetails) {
       (this.wl = this.l + this.w),
       (this.cl = this.l + this.c),
       (this.lc = this.l + this.c),
+      (this.wc = this.w + this.c),
       (this.default = this.l + this.w + this.c);
   };
 
