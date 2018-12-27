@@ -35,15 +35,16 @@ const createPrintableFormat = function(option, fileDetails) {
   let justifiedWordCount = justifier(wordCount) + wordCount;
   let justifiedByteCount = justifier(byteCount) + byteCount;
 
-  const optionListConstructor = function(){
-    this.l =  justifiedLineCount,
-    this.w =  justifiedWordCount,
-    this.c =  justifiedByteCount,
-    this.lw = this.l + this.w,
-    this.default = this.l + this.w + this.c;
+  const optionListConstructor = function() {
+    (this.l = justifiedLineCount),
+      (this.w = justifiedWordCount),
+      (this.c = justifiedByteCount),
+      (this.lw = this.l + this.w),
+      (this.wl = this.l + this.w),
+      (this.default = this.l + this.w + this.c);
   };
 
-  const logContent = new optionListConstructor()
+  const logContent = new optionListConstructor();
 
   return logContent[option] + justifiedPath;
 };
