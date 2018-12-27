@@ -29,7 +29,7 @@ const getDetails = function(fs, path) {
 
 const createPrintableFormat = function(options, fileDetails) {
   let orderedOptions = ["l", "w", "c"];
-  if (options === undefined) options = orderedOptions;
+  if (options.length == 0) options = orderedOptions;
   let { lineCount, wordCount, byteCount, path } = fileDetails;
   let justifiedPath = " " + path;
   let justifiedLineCount = justifier(lineCount) + lineCount;
@@ -41,9 +41,7 @@ const createPrintableFormat = function(options, fileDetails) {
     w: justifiedWordCount,
     c: justifiedByteCount
   };
-  let givenOptionsInOrder = orderedOptions.filter(option =>
-    options.includes(option)
-  );
+  let givenOptionsInOrder = orderedOptions.filter(x => options.includes(x));
   return givenOptionsInOrder.map(x => optionList[x]).join("") + justifiedPath;
 };
 

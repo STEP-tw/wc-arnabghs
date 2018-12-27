@@ -7,7 +7,7 @@ describe("readUserInput", () => {
     it("should return path", () => {
       let userArgs = "one.txt".split(" ");
       let actualOutput = readUserInput(userArgs);
-      let expectedOutput = { paths: ["one.txt"] };
+      let expectedOutput = { paths: ["one.txt"], options: [] };
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });
@@ -15,7 +15,7 @@ describe("readUserInput", () => {
     it("should return path", () => {
       let userArgs = "one.txt two.txt".split(" ");
       let actualOutput = readUserInput(userArgs);
-      let expectedOutput = { paths: ["one.txt", "two.txt"] };
+      let expectedOutput = { paths: ["one.txt", "two.txt"], options: [] };
       assert.deepEqual(actualOutput, expectedOutput);
     });
   });

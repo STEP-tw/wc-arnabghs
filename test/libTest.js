@@ -61,7 +61,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-l fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -80,7 +79,6 @@ describe("head level test for wc", () => {
     it("should provide the number of bytes for a single file", () => {
       let userArgs = "-c fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -99,7 +97,6 @@ describe("head level test for wc", () => {
     it("should provide the number of words for a single file", () => {
       let userArgs = "-w fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       5 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -236,7 +233,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-lcw fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -255,7 +251,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-lwc fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -372,7 +367,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-l -c -w fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -391,7 +385,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-l -w -c fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -410,7 +403,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-w -l -c fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -429,7 +421,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-w -c -l fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -448,7 +439,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-c -w -l fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -467,7 +457,6 @@ describe("head level test for wc", () => {
     it("should provide the number of lines for a single file", () => {
       let userArgs = "-c -l -w fiveLines.txt".split(" ");
       let actualOutput = wc(userArgs, dummyFs);
-      console.log(actualOutput);
       let expectedOutput = "       4       5       9 fiveLines.txt";
       assert.deepEqual(actualOutput, expectedOutput);
     });
@@ -499,7 +488,7 @@ describe("getDetails", () => {
 });
 
 describe("createPrintableFormat", () => {
-  let option = undefined;
+  let option = [];
   let details = {
     lineCount: 4,
     wordCount: 5,
