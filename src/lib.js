@@ -30,19 +30,24 @@ const getDetails = function(fs, path) {
 const createPrintableFormat = function(options, fileDetails) {
   let orderedOptions = ["l", "w", "c"];
   if (options.length == 0) options = orderedOptions;
+  let justifiedDetails = justifyAllDetails(fileDetails);
+  let givenOptionsInOrder = orderedOptions.filter(x => options.includes(x));
+  let justifiedCounts = givenOptionsInOrder.map(x => justifiedDetails[x]);
+  return justifiedCounts.join("") + justifiedDetails.path;
+};
+
+const justifyAllDetails = function(fileDetails) {
   let { lineCount, wordCount, byteCount, path } = fileDetails;
   let justifiedPath = " " + path;
   let justifiedLineCount = justifier(lineCount) + lineCount;
   let justifiedWordCount = justifier(wordCount) + wordCount;
   let justifiedByteCount = justifier(byteCount) + byteCount;
-
-  const optionList = {
+  return {
+    path: justifiedPath,
     l: justifiedLineCount,
     w: justifiedWordCount,
     c: justifiedByteCount
   };
-  let givenOptionsInOrder = orderedOptions.filter(x => options.includes(x));
-  return givenOptionsInOrder.map(x => optionList[x]).join("") + justifiedPath;
 };
 
 const getTotal = function(detailsOfFiles) {
