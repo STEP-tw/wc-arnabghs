@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --reporter min"
+    "mochaTest": "mocha --reporter min",
+    "appTest": "node scripts/appTest.js textFiles/fiveLines.txt textFiles/fiveChars.txt"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/STEP-tw/wc-arnabghs#readme",
   "devDependencies": {
     "mocha": "^5.2.0",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "shelljs": "^0.8.3"
   }
 }
