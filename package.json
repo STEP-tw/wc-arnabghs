@@ -8,7 +8,7 @@
   },
   "scripts": {
     "mochaTest": "mocha --reporter min",
-    "appTest": "node scripts/appTest.js textFiles/fiveLines.txt textFiles/fiveChars.txt"
+    "appTest": "time node scripts/appTest.js textFiles/fiveLines.txt textFiles/fiveChars.txt"
   },
   "repository": {
     "type": "git",

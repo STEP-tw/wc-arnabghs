@@ -6,12 +6,12 @@ const file2 = process.argv[3];
 const green = "\x1b[32m";
 const red = "\x1b[31m";
 const reset = "\x1b[0m";
-let message = red + "Failed" + reset;
 
 console.log("PLZ provide sample file", "ignore if provided\n");
 
 console.log("For Single File");
 options.map(option => {
+let message = red + "Failed" + reset;
   const shellOut = shellCmd("wc " + option + " " + file1, { silent: true })
     .stdout;
   const userOut = shellCmd("node wc.js " + option + " " + file1, {
@@ -35,6 +35,7 @@ options.map(option => {
 
 console.log("\nFor Multiple Files");
 options.map(option => {
+let message = red + "Failed" + reset;
   const shellOut = shellCmd("wc " + option + " " + file1 + " " + file2, {
     silent: true
   }).stdout;
