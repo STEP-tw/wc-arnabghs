@@ -10,24 +10,44 @@ const {
   justifier
 } = require("./util.js");
 
-const wc = function(userArgs, fs) {
+
+const generateOutput = function (err, detailsOfFiles, decorater) {
+  if (detailsOfFiles.length != 1) detailsOfFiles.push(getTotal(detailsOfFiles));
+  console.log(detailsOfFiles.map(decorater).join("\n"));
+}
+
+const wc = function (userArgs, fs) {
   let { paths, options } = readUserInput(userArgs);
   const formatAsPerOption = createPrintableFormat.bind(null, options);
-  const fsBoundGetDeatils = getDetails.bind(null, fs);
-  let detailsOfFiles = paths.map(fsBoundGetDeatils);
-  if (detailsOfFiles.length != 1) detailsOfFiles.push(getTotal(detailsOfFiles));
-  return detailsOfFiles.map(formatAsPerOption).join("\n");
+  return getFinalOutput(fs, paths, generateOutput, formatAsPerOption);
 };
 
-const getDetails = function(fs, path) {
-  let content = fs.readFileSync(path, "utf-8");
+const getFinalOutput = function (fs, paths, callback, decorater) {
+  let detailsOfFiles = [];
+  let counter = 0;
+  for (path of paths) {
+    let fileDetails = {};
+    fileDetails.path = path;
+    fs.readFile(path, "utf-8", function (err, content) {
+      let fileDetail = getDetails(content, fileDetails);
+      detailsOfFiles.push(fileDetail);
+      counter++;
+      if (counter == paths.length) callback(null, detailsOfFiles, decorater);
+    })
+  }
+}
+
+const getDetails = function (content, fileDetail) {
   let lineCount = getLineCount(content);
   let byteCount = getByteCount(content);
   let wordCount = getWordCount(content);
-  return { lineCount, wordCount, byteCount, path };
-};
+  fileDetail.lineCount = lineCount;
+  fileDetail.wordCount = wordCount;
+  fileDetail.byteCount = byteCount;
+  return fileDetail;
+}
 
-const createPrintableFormat = function(options, fileDetails) {
+const createPrintableFormat = function (options, fileDetails) {
   let orderedOptions = ["l", "w", "c"];
   if (options.length == 0) options = orderedOptions;
   let justifiedDetails = justifyAllDetails(fileDetails);
@@ -36,7 +56,7 @@ const createPrintableFormat = function(options, fileDetails) {
   return justifiedCounts.join("") + justifiedDetails.path;
 };
 
-const justifyAllDetails = function(fileDetails) {
+const justifyAllDetails = function (fileDetails) {
   let { lineCount, wordCount, byteCount, path } = fileDetails;
   let justifiedPath = " " + path;
   let justifiedLineCount = justifier(lineCount) + lineCount;
@@ -50,7 +70,7 @@ const justifyAllDetails = function(fileDetails) {
   };
 };
 
-const getTotal = function(detailsOfFiles) {
+const getTotal = function (detailsOfFiles) {
   let lineCount = detailsOfFiles.reduce(addLines, 0);
   let wordCount = detailsOfFiles.reduce(addWords, 0);
   let byteCount = detailsOfFiles.reduce(addBytes, 0);
