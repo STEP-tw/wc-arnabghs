@@ -1,32 +1,32 @@
 {
-  "name": "wc-arnabghs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "wc.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "mochaTest": "mocha --reporter min",
-    "appTest": "time node sAcripts/appTest.js textFiles/fiveLines.txt textFiles/fiveChars.txt",
-    "eslint_src": "eslint src/*",
-    "eslint_test": "eslint test/*",
-    "eslint_fix": "eslint --fix"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/STEP-tw/wc-arnabghs.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/STEP-tw/wc-arnabghs/issues"
-  },
-  "homepage": "https://github.com/STEP-tw/wc-arnabghs#readme",
-  "devDependencies": {
-    "eslint": "^5.11.1",
-    "mocha": "^5.2.0",
-    "prettier": "^1.15.3",
-    "shelljs": "^0.8.3"
-  }
+	"name": "wc-arnabghs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "wc.js",
+	"directories": {
+		"test": "test"
+	},
+	"scripts": {
+		"mochaTest": "mocha --reporter min",
+		"appTest": "time node scripts/appTest.js textFiles/fiveLines.txt textFiles/fiveChars.txt",
+		"eslint_src": "eslint src/*",
+		"eslint_test": "eslint test/*",
+		"eslint_fix": "eslint --fix"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/STEP-tw/wc-arnabghs.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/STEP-tw/wc-arnabghs/issues"
+	},
+	"homepage": "https://github.com/STEP-tw/wc-arnabghs#readme",
+	"devDependencies": {
+		"eslint": "^5.11.1",
+		"mocha": "^5.2.0",
+		"prettier": "^1.15.3",
+		"shelljs": "^0.8.3"
+	}
 }
