@@ -11,7 +11,7 @@ console.log("PLZ provide sample file", "ignore if provided\n");
 
 console.log("For Single File");
 options.map(option => {
-let message = red + "Failed" + reset;
+  let message = red + "Failed" + reset;
   const shellOut = shellCmd("wc " + option + " " + file1, { silent: true })
     .stdout;
   const userOut = shellCmd("node wc.js " + option + " " + file1, {
@@ -35,7 +35,7 @@ let message = red + "Failed" + reset;
 
 console.log("\nFor Multiple Files");
 options.map(option => {
-let message = red + "Failed" + reset;
+  let message = red + "Failed" + reset;
   const shellOut = shellCmd("wc " + option + " " + file1 + " " + file2, {
     silent: true
   }).stdout;
